@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Создание категории</h2>
+  <form method="post" action="{% url 'category_create' %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Создать категорию</button>
+  </form>
+  <br>
+  <a href="{% url 'category_list' %}">Назад к списку категорий</a>
+{% endblock %}

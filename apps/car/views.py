@@ -1,30 +1,26 @@
-from rest_framework import generics, permissions
-from rest_framework.authentication import SessionAuthentication
-
+from django.views.generic import *
 from .models import Car
-from .serializers import CarSerializer
-from ..accounts.permissions import IsAuthorOrAllowAny
 
 
-class CarCreateView(generics.CreateAPIView):
-    queryset = Car.objects.all()
-    serializer_class = CarSerializer
-    authentication_classes = [SessionAuthentication, ]
-    permission_classes = [permissions.IsAuthenticated]
-
-    def perform_create(self, serializer):
-        serializer.save(author=self.request.user)
-
-
-class CarDetailView(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Car.objects.all()
-    serializer_class = CarSerializer
-    authentication_classes = [SessionAuthentication, ]
-    permission_classes = [IsAuthorOrAllowAny, ]
+class CarCreateView(CreateView):
+    model = Car
+    template_name = 'car_create.html'
+    fields = ['title', 'price', 'description', 'brand', 'image', 'category', 'year_of_issue', 'mileage',
+              'body', 'color', 'engine', 'transmission', 'drive_unit', 'rudder', 'car_condition', 'customs',
+              'region', 'registration', 'other', 'author']
+    success_url = '/car/create/'
 
 
-class CarListView(generics.ListAPIView):
-    queryset = Car.objects.all()
-    serializer_class = CarSerializer
+class CarDetailView(DetailView):
+    model = Car
+    template_name = 'car_detail.html'
+    context_object_name = 'detail'
+
+
+class CarListView(ListView):
+    model = Car
+    template_name = 'car_list.html'
+    context_object_name = 'list'
+
 
 

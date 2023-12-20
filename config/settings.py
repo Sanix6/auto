@@ -23,7 +23,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
+    'bootstrap5',
+    
     'corsheaders',
     'drf_yasg',
     'rest_framework',
@@ -50,7 +51,7 @@ ROOT_URLCONF = 'config.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'apps/templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

@@ -3,3 +3,4 @@ djangorestframework
 Pillow
 drf-yasg
 django-cors-headers
+django-bootstrap5==23.3

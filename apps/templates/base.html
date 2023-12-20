@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+{% load static %}
+{% load bootstrap5 %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Машины</title>
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+
+</head>
+<body>
+    <nav>
+        <a href="/">Главная</a> |
+        <a href="{% url 'car_create' %}">Cоздать машину</a> |
+        <a href="{% url 'car_list' %}">Cписок автомобилей</a> |
+        <a href="{% url 'category_create' %}">Создать категорию</a> |
+        <a href="{% url 'category_list' %}">Список категорий</a> |
+        <a href="{% url 'brand_create' %}">Создать бренд</a> |
+        <a href="{% url 'brand_list' %}">Список брендов</a> |
+    </nav>
+
+    {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li>{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    {% block content %}
+
+    {% endblock %}
+</body>
+</html>

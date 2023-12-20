@@ -9,6 +9,7 @@ from .models import User
 from .permissions import IsSuperuserOrReadOnly, IsOwnerOrReadOnly
 from .serializers import UserRegisterSerializer, UserSerializer
 from django.contrib.auth import logout
+from django.shortcuts import render
 
 
 class LogoutView(APIView):
@@ -57,6 +58,10 @@ class UserListView(generics.ListAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
     permission_classes = [IsAuthenticated, IsSuperuserOrReadOnly]
+
+    def list(self, request, *args, **kwargs):
+        users = self.get_queryset()
+        return render(request, 'myapp/user_list.html', {'object_list': users})
 
 
 class UserDetailView(generics.RetrieveUpdateDestroyAPIView):
