@@ -1,22 +1,41 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
-<html>
+<html lang="ru">
 <head>
-    <title>Список автомобилей</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Список машин</title>
 </head>
 <body>
 
-    <h1>Список автомобилей</h1>
+    <h1>Список машин</h1>
 
     <ul>
-        {% for car in cars %}
-            <li>{{ car.model }} - {{ car.year }}</li>
+        {% for car in object_list %}
+            <li>{{ car.title }}</li>
+            <li>{{ car.price }}</li>
+            <li>{{ car.brand }}</li>
+            <li>{{ car.image }}</li>
+            <li>{{ car.year_of_issue }}</li>
+            <li>{{ car.mileage }}</li>
+            <li>{{ car.body }}</li>
+            <li>{{ car.color }}</li>
+            <li>{{ car.engine }}</li>
+            <li>{{ car.transmission }}</li>
+            <li>{{ car.drive_unit }}</li>
+            <li>{{ car.rudder }}</li>
+            <li>{{ car.car_condition }}</li>
+            <li>{{ car.customs }}</li>
+            <li>{{ car.author }}</li>
         {% endfor %}
     </ul>
+
 </body>
 </html>
 <br>
-  <a href="{% url 'car_create' %}">Назад</a>
+  <a href="{% url 'car_create' %}">Назад к созданию машин</a>
 {% endblock %}
+'title', 'price', 'description', 'brand', 'image', 'category', 'year_of_issue', 'mileage',
+              'body', 'color', 'engine', 'transmission', 'drive_unit', 'rudder', 'car_condition', 'customs',
+              'region', 'registration', 'other', 'author']

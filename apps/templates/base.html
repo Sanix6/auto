@@ -13,13 +13,19 @@
 </head>
 <body>
     <nav>
-        <a href="/">Главная</a> |
+        <a href="{% url 'car_list' %}">Главная</a> |
         <a href="{% url 'car_create' %}">Cоздать машину</a> |
         <a href="{% url 'car_list' %}">Cписок автомобилей</a> |
         <a href="{% url 'category_create' %}">Создать категорию</a> |
         <a href="{% url 'category_list' %}">Список категорий</a> |
         <a href="{% url 'brand_create' %}">Создать бренд</a> |
         <a href="{% url 'brand_list' %}">Список брендов</a> |
+        <a href="{% url 'country_create' %}">Создать страну</a> |
+        <a href="{% url 'country_list' %}">Список стран</a> |
+        <a href="{% url 'registration' %}">Регистрация</a> |
+        <a href="{% url 'sign-in' %}">Вход</a> |
+        <a href="{% url 'sign-in' %}">Выход</a> |
+
     </nav>
 
     {% if messages %}

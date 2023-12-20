@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Создание страны</h2>
+       <form method="post" action="{% url 'country_create' %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Создать страну</button>
+  </form>
+  <a href="{% url 'brand_list' %}">Вернуться к списку стран</a>
+{% endblock %}

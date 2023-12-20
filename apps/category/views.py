@@ -1,7 +1,6 @@
 from rest_framework import generics
 from .models import Category, Brand, Country
 from .serializers import CategorySerializer, BrandSerializer, CountrySerializer
-from ..accounts.permissions import IsSuperuserOrReadOnly
 from django.views.generic import CreateView, DetailView, ListView
 
 
@@ -30,7 +29,7 @@ class BrandCreateView(CreateView):
     model = Brand
     template_name = 'brand_create.html'
     fields = ['title']
-    success_url = 'category/brand_create/'
+    success_url = '/category/brand_create/'
 
 
 class BrandDetailView(DetailView):
@@ -47,18 +46,21 @@ class BrandListView(ListView):
     success_url = '/brand/brand_list'
 
 
-class CountryCreateView(generics.CreateAPIView):
-    queryset = Country.objects.all()
-    serializer_class = CountrySerializer
-    permission_classes = [IsSuperuserOrReadOnly]
+class CountryCreateView(CreateView):
+    model = Country
+    template_name = 'country_create.html'
+    fields = ['title']
+    success_url = '/category/country_create/'
 
 
 class CountryDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Country.objects.all()
     serializer_class = CountrySerializer
-    permission_classes = [IsSuperuserOrReadOnly]
 
 
-class CountryListView(generics.ListAPIView):
-    queryset = Country.objects.all()
-    serializer_class = CountrySerializer
+
+class CountryListView(ListView):
+    model = Country
+    template_name = 'country_list.html'
+    fields = ['title']
+    success_url = '/country/country_list'

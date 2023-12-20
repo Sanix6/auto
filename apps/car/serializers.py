@@ -1,7 +1,7 @@
 from rest_framework import serializers
 
 from .models import Car
-from ..accounts.serializers import UserSerializer
+from apps.userapp.serializers import UserSerializer
 
 
 class CarSerializer(serializers.ModelSerializer):

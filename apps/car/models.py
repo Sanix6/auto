@@ -1,6 +1,6 @@
 from django.db import models
-
-from apps.accounts.models import User
+# django.contrib.auth.models import User
+from apps.userapp.models import User
 from apps.category.models import Brand, Country, Category
 
 BODY_CHOICES = (
@@ -65,7 +65,7 @@ class Car(models.Model):
     price = models.IntegerField(verbose_name='Стоимость')
     description = models.TextField(max_length=2000, verbose_name='Описание', blank=True)
     brand = models.ForeignKey(to=Brand, on_delete=models.CASCADE, related_name='Марка',)
-    image = models.ImageField(upload_to='car_image/')
+    image = models.ImageField(upload_to='car_image/', blank=True)
     category = models.ForeignKey(to=Category, on_delete=models.CASCADE, related_name='Категория')
     year_of_issue = models.IntegerField(verbose_name='Год выпуска')
     mileage = models.IntegerField(verbose_name='Пробег')

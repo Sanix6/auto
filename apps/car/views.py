@@ -19,8 +19,11 @@ class CarDetailView(DetailView):
 
 class CarListView(ListView):
     model = Car
+    fields = ['title', 'price', 'description', 'brand', 'image', 'category', 'year_of_issue', 'mileage',
+              'body', 'color', 'engine', 'transmission', 'drive_unit', 'rudder', 'car_condition', 'customs',
+              'region', 'registration', 'other', 'author']
     template_name = 'car_list.html'
-    context_object_name = 'list'
+    context_object_name = '/car/list/'
 
 
 
