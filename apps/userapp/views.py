@@ -1,41 +1,41 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
-from apps.userapp.models import User
+from apps.userapp.models import *
 from django.contrib import messages
+from rest_framework import status
+from rest_framework.generics import CreateAPIView
+from rest_framework.response import Response
+from .serializers import *
 
 
-def registration(request):
-    if request.method == "POST":
-        password_1 = request.POST["password_1"]
-        password_2 = request.POST["password_2"]
-        if password_1 != password_2:
-            messages.error(request, "Пароли не совпадают")
-        else:
-            user = User(
-                username=request.POST["login"],
-                first_name=request.POST["first_name"],
-                last_name=request.POST["last_name"],
-                email=request.POST["email"],
+class RegisterView(CreateAPIView):
+    queryset = User.objects.all()
+    serializer_class = RegisterSerializer
+
+    def post(self, request, *args, **kwargs):
+        serializer = self.serializer_class(data=request.data)
+
+        if User.objects.filter(email=request.data["email"]).exists():
+            return Response(
+                {
+                    "response": False,
+                    "message": "Пользователь с таким электронным адресом уже существует.",
+                }
             )
-            user.set_password(password_1)
+
+        if serializer.is_valid():
+            email = serializer.data["email"]
+            first_name = serializer.data["first_name"]
+            last_name = serializer.data["last_name"]
+            password = serializer.data["password"]
+            phone = serializer.data["phone"]
+
+            user = User(
+                email=email, first_name=first_name, last_name=last_name, phone=phone
+            )
+            user.set_password(password)
             user.save()
-            messages.success(request, "Вы успешно прошли регистрацию!")
-            return redirect("/car/list/")
-
-    return render(request, 'userapp/registration.html')
 
 
-def sign_in(request):
-    if request.method == "POST":
-        username = request.POST['username']
-        password = request.POST['password']
-        user = authenticate(request=request, username=username, password=password)
-        if user is not None:
-            login(request, user)
-            return redirect('/car/list/')
-    return render(request, 'userapp/sign_in.html')
-
-
-def sign_out(request):
-    logout(request)
-    return redirect('/sign-in/')
+            return Response({"response": True, "message": "Код подверждения отправлено на вашу почту!"}, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors)

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-{% load static %}
 {% load bootstrap5 %}
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -9,29 +9,83 @@
     <title>Машины</title>
     {% bootstrap_css %}
     {% bootstrap_javascript %}
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+        }
 
+        nav {
+            background-color: #333;
+            padding: 20px;
+            height: 70px;
+            text-align: center;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 10px;
+            font-size: 20px;
+        }
+
+        nav a:hover {
+            text-decoration: none;
+            color: orange;
+            font-size: 25px;
+            transition: 0.9s ;
+        }
+        nav a:after {
+            transition: 0.9s ;
+            }
+
+        .messages {
+            list-style: none;
+            padding: 0;
+            margin: 10px 0;
+        }
+
+        .messages li {
+            margin-bottom: 5px;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .messages.success {
+            background-color: #dff0d8;
+            border: 1px solid #d0e9c6;
+            color: #3c763d;
+        }
+
+        .messages.error {
+            background-color: #f2dede;
+            border: 1px solid #ebccd1;
+            color: #a94442;
+        }
+    </style>
 </head>
 <body>
     <nav>
-        <a href="{% url 'car_list' %}">Главная</a> |
-        <a href="{% url 'car_create' %}">Cоздать машину</a> |
-        <a href="{% url 'car_list' %}">Cписок автомобилей</a> |
-        <a href="{% url 'category_create' %}">Создать категорию</a> |
-        <a href="{% url 'category_list' %}">Список категорий</a> |
-        <a href="{% url 'brand_create' %}">Создать бренд</a> |
-        <a href="{% url 'brand_list' %}">Список брендов</a> |
-        <a href="{% url 'country_create' %}">Создать страну</a> |
-        <a href="{% url 'country_list' %}">Список стран</a> |
-        <a href="{% url 'registration' %}">Регистрация</a> |
-        <a href="{% url 'sign-in' %}">Вход</a> |
-        <a href="{% url 'sign-in' %}">Выход</a> |
-
+        <a href="{% url 'car_list' %}">Главная</a>
+        <a href="{% url 'car_create' %}">Cоздать машину</a>
+        <a href="{% url 'car_list' %}">Cписок автомобилей</a>
+        <a href="{% url 'category_create' %}">Создать категорию</a>
+        <a href="{% url 'category_list' %}">Список категорий</a>
+        <a href="{% url 'brand_create' %}">Создать бренд</a>
+        <a href="{% url 'brand_list' %}">Список брендов</a>
+        <a href="{% url 'country_create' %}">Создать страну</a>
+        <a href="{% url 'country_list' %}">Список стран</a>
+        <a href="{% url 'registration' %}">Регистрация</a>
+        <a href="{% url 'sign-in' %}">Вход</a>
+        <a href="{% url 'sign-out' %}">Выход</a>
     </nav>
 
     {% if messages %}
         <ul class="messages">
             {% for message in messages %}
-            <li>{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                <li class="messages {{ message.tags }}">{{ message }}</li>
             {% endfor %}
         </ul>
     {% endif %}

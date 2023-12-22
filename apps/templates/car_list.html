@@ -6,33 +6,120 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Список машин</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+
+        li {
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin: 10px;
+            padding: 15px;
+            width: 300px;
+            border-radius: 8px;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        li:hover {
+            transform: scale(1.05);
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        p {
+            margin: 0;
+            color: #555;
+        }
+
+        .card-title {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .card-price {
+            color: #e44d26;
+            font-size: 1.1em;
+            font-weight: bold;
+        }
+
+        .card-brand {
+            font-size: 1.1em;
+            font-style: italic;
+        }
+         footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            height: 280px;
+        }
+        footer span {
+            font-size: 15px;
+        }
+    </style>
 </head>
 <body>
 
-    <h1>Список машин</h1>
+<h1>Список машин</h1>
 
     <ul>
         {% for car in object_list %}
-            <li>{{ car.title }}</li>
-            <li>{{ car.price }}</li>
-            <li>{{ car.brand }}</li>
-            <li>{{ car.image }}</li>
-            <li>{{ car.year_of_issue }}</li>
-            <li>{{ car.mileage }}</li>
-            <li>{{ car.body }}</li>
-            <li>{{ car.color }}</li>
-            <li>{{ car.engine }}</li>
-            <li>{{ car.transmission }}</li>
-            <li>{{ car.drive_unit }}</li>
-            <li>{{ car.rudder }}</li>
-            <li>{{ car.car_condition }}</li>
-            <li>{{ car.customs }}</li>
-            <li>{{ car.author }}</li>
+            <li class="card">
+                <img src="http://127.0.0.1:8000/media/{{ car.image }}" alt="car"/>
+                <p class="card-title">{{ car.title }}</p>
+                <p class="card-price">{{ car.price }}</p>
+                <p class="card-brand">{{ car.brand }}</p>
+                <p>{{ car.year_of_issue }}</p>
+                <p>{{ car.mileage }}</p>
+                <p>{{ car.body }}</p>
+                <p>{{ car.color }}</p>
+                <p>{{ car.engine }}</p>
+                <p>{{ car.transmission }}</p>
+                <p>{{ car.drive_unit }}</p>
+                <p>{{ car.rudder }}</p>
+                <p>{{ car.car_condition }}</p>
+                <p>{{ car.customs }}</p>
+                <p>{{ car.author }}</p>
+            </li>
         {% endfor %}
     </ul>
-
+    <footer>
+        <span>
+            наш адресс: бешбармак 74
+        </span>
+        <span>
+            наш контакты: +996703505605
+        </span>
+    </footer>
 </body>
 </html>
+
 <br>
   <a href="{% url 'car_create' %}">Назад к созданию машин</a>
 {% endblock %}
